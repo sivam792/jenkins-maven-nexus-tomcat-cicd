@@ -74,18 +74,6 @@ LinkedIn posts
 
 Interview preparation
 
-yaml
-Copy code
-
-### **3. Paste it into the big box**
-
-That’s it.  
-Nothing else.
-
----
-
-# If you want, show me a photo of your screen again  
-I will tell you exactly where to paste it.
 
 
 
