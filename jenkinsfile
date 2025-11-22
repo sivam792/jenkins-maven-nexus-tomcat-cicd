@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    
+    tools {
+        maven 'mymaven'
+    }
+
+    stages {
+        stage('code') {
+            steps {
+                git 'https://github.com/sivam792/one.git'
+            }
+        }
+
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('artifactor') {
+            steps {
+                nexusArtifactUploader artifacts: [[
+                    artifactId: 'myweb',
+                    classifier: '',
+                    file: 'target/myweb-8.6.9.war',
+                    type: 'war'
+                ]],
+                credentialsId: 'sivam',
+                groupId: 'in.javahome',
+                nexusUrl: '18.191.222.216:8081/',
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                repository: 'myrepo',
+                version: '8.6.9'
+            }
+        }
+
+        stage('deployment') {
+            steps {
+                deploy adapters: [
+                    tomcat9(
+                        alternativeDeploymentContext: '',
+                        credentialsId: 'tom',
+                        path: '',
+                        url: 'http://18.221.84.14:8080/'
+                    )
+                ],
+                contextPath: 'mahi',
+                war: 'target/*.war'
+            }
+        }
+    }
+}
