@@ -40,7 +40,7 @@ flowchart LR
 A[Git Checkout] --> B[Maven Build]
 B --> C[Nexus Upload]
 C --> D[Tomcat Deployment]
-🛠️ Tools Used
+ Tools Used
 Jenkins
 
 Maven
